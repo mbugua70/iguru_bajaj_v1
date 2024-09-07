@@ -70,7 +70,6 @@ const RegistrationPage = () => {
         <div className="card-panel card-relative">
           <div className="parentError">
             <span>
-              {" "}
               {loginLoaderMessage === null ? (
                 ""
               ) : (
@@ -123,8 +122,75 @@ const RegistrationPage = () => {
       </div>
 
       {/* Bajaj code */}
-
-
+      <div className="main_body">
+        <div className="row" id="top_row">
+          <div className="row parcel_form">
+            <div className="parentError">
+              <span>
+                {loginLoaderMessage === null ? (
+                  ""
+                ) : (
+                  <i className="material-icons">error</i>
+                )}
+              </span>
+              <p className="login_errmessage">
+                {loginLoaderMessage && !errorMessage && loginLoaderMessage}
+                {errorMessage && errorMessage}
+              </p>
+            </div>
+            <form id="parcel_form">
+              <div class="input-field col s12">
+                <span>Name</span>
+                <br />
+                <input
+                  id="ba_name"
+                  placeholder="Your Name"
+                  type="text"
+                  defaultValue={
+                    storeBaTwo === null ? "" : storeBaTwo.user.ba_name
+                  }
+                />
+              </div>
+              <div class="input-field col s12">
+                <span>Your Phone Number</span>
+                <br />
+                <input
+                  id="ba_phone"
+                  placeholder="Your Phone Number"
+                  type="tel"
+                  defaultValue={
+                    storeBaTwo === null ? "" : storeBaTwo.user.ba_phone
+                  }
+                />
+              </div>
+              <div class="input-field col s12">
+                <span>Region</span>
+                <br />
+                <input
+                  id="ba_region"
+                  placeholder="Region"
+                  type="text"
+                  defaultValue={
+                    storeBaTwo === null ? "" : storeBaTwo.user.ba_location
+                  }
+                />
+              </div>
+              <div class="input-field col s12 center_it">
+                <button
+                  id="register_btn"
+                  class="btn-large  margin-bottom waves-effect waves-light pick_color"
+                  type="button"
+                  disabled={navigation.state === "submitting"}
+                >
+                  {navigation.state === "submitting"
+                    ? "registering"
+                    : "Register"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
