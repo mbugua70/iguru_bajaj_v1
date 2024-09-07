@@ -1,0 +1,12 @@
+/* css styling for react toastify */
+
+/* error toast */
+.Toastify__toast--error{
+    background-color: #f1c8c8;
+    color: rgb(209, 12, 12);
+  }
+
+
+.Toastify__progress-bar--wrp{
+    color: #fff !important;
+}

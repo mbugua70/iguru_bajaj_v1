@@ -6,11 +6,10 @@
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import {  Form,redirect,  useActionData, useNavigation, useLoaderData } from "react-router-dom";
+import { ToastContainer, toast, Bounce } from "react-toastify";
 
 import { loginUser } from "./api";
-
-
-
+import { useEffect } from "react";
 
 export const loginloader = ({ request }) => {
   return new URL(request.url).searchParams.get("message");
@@ -33,6 +32,7 @@ export const action = async ({ request }) => {
     const ba_name = formdata.get("ba_name");
     const ba_phone = formdata.get("ba_phone");
     const ba_location = formdata.get("ba_location");
+
     const workout = { ba_name, ba_phone, ba_location };
     const data = await loginUser(workout);
     if (data) {
@@ -54,92 +54,66 @@ export const action = async ({ request }) => {
   }
 };
 
+// react toastify
+const registration_error_id = "login ba error";
+
+const notifyError = (msg) => {
+  toast.error(`${msg}`, {
+    toastId: registration_error_id,
+    position: "bottom-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    transition: Bounce,
+  });
+};
+
 const RegistrationPage = () => {
   const loginLoaderMessage = useLoaderData();
 
   const navigation = useNavigation();
 
   const errorMessage = useActionData();
+  console.log(errorMessage);
 
   const storeBa = localStorage.getItem("Auth");
   const storeBaTwo = JSON.parse(storeBa);
 
+  useEffect(() => {
+    if (errorMessage) {
+      notifyError(errorMessage);
+      console.log("rendered")
+    }
+  }, [errorMessage]);
+
+  useEffect(() => {
+    if (loginLoaderMessage) {
+      notifyError(loginLoaderMessage);
+    }
+  }, [loginLoaderMessage]);
+
   return (
     <>
-      <div className="container">
-        <div className="card-panel card-relative">
-          <div className="parentError">
-            <span>
-              {loginLoaderMessage === null ? (
-                ""
-              ) : (
-                <i className="material-icons">error</i>
-              )}
-            </span>
-            <p className="login_errmessage">
-              {loginLoaderMessage && !errorMessage && loginLoaderMessage}
-              {errorMessage && errorMessage}
-            </p>
-          </div>
-          <Form className="form" method="post" replace>
-            <label htmlFor="ba_name">Name</label>
-            <input
-              type="text"
-              name="ba_name"
-              id="ba_name"
-              placeholder="Enter name"
-              defaultValue={storeBaTwo === null ? "" : storeBaTwo.user.ba_name}
-            />
-            <label htmlFor="ba_phone">Phone Numbers</label>
-            <input
-              type="tel"
-              name="ba_phone"
-              id="ba_phone"
-              placeholder="Tel e.g 0728**"
-              defaultValue={storeBaTwo === null ? "" : storeBaTwo.user.ba_phone}
-            />
-            <label htmlFor="ba_location">Location</label>
-            <input
-              type="text"
-              name="ba_location"
-              id="ba_location"
-              placeholder="Enter location"
-              defaultValue={
-                storeBaTwo === null ? "" : storeBaTwo.user.ba_location
-              }
-            />
-
-            <span className="flex_button">
-              <button
-                className="btn waves-effect color_change"
-                disabled={navigation.state === "submitting"}
-              >
-                {navigation.state === "submitting" ? "registering" : "Register"}
-              </button>
-            </span>
-          </Form>
-        </div>
-      </div>
-
       {/* Bajaj code */}
       <div className="main_body">
         <div className="row" id="top_row">
           <div className="row parcel_form">
             <div className="parentError">
-              <span>
+              {/* <span>
                 {loginLoaderMessage === null ? (
                   ""
                 ) : (
                   <i className="material-icons">error</i>
                 )}
-              </span>
-              <p className="login_errmessage">
-                {loginLoaderMessage && !errorMessage && loginLoaderMessage}
-                {errorMessage && errorMessage}
-              </p>
+              </span> */}
+              <p className="login_errmessage">{errorMessage && errorMessage}</p>
             </div>
-            <form id="parcel_form">
-              <div class="input-field col s12">
+            <Form id="parcel_form" method="post" replace>
+              <div className="input-field col s12">
                 <span>Name</span>
                 <br />
                 <input
@@ -151,7 +125,7 @@ const RegistrationPage = () => {
                   }
                 />
               </div>
-              <div class="input-field col s12">
+              <div className="input-field col s12">
                 <span>Your Phone Number</span>
                 <br />
                 <input
@@ -163,7 +137,7 @@ const RegistrationPage = () => {
                   }
                 />
               </div>
-              <div class="input-field col s12">
+              <div className="input-field col s12">
                 <span>Region</span>
                 <br />
                 <input
@@ -175,11 +149,10 @@ const RegistrationPage = () => {
                   }
                 />
               </div>
-              <div class="input-field col s12 center_it">
+              <div className="input-field col s12 center_it">
                 <button
                   id="register_btn"
-                  class="btn-large  margin-bottom waves-effect waves-light pick_color"
-                  type="button"
+                  className="btn-large  margin-bottom waves-effect waves-light pick_color"
                   disabled={navigation.state === "submitting"}
                 >
                   {navigation.state === "submitting"
@@ -187,10 +160,11 @@ const RegistrationPage = () => {
                     : "Register"}
                 </button>
               </div>
-            </form>
+            </Form>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };

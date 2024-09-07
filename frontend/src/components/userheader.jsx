@@ -4,20 +4,21 @@ const UserHeader = () =>{
 
     const locaton = useLocation()
     const pathname = locaton.pathname
-    return(
-        <>
-           <header>
-      <nav>
-        <div className="nav-wrapper">
-          <span className="brand-logo center"> {pathname === "/registration" ? "Registration" : "Survey"}</span>
-          <Link to="/" className="right home-icon" id="home-el">
-            <i className="material-icons">home</i>
-          </Link>
-        </div>
-      </nav>
-    </header>
-        </>
-    )
+    return (
+      <>
+        <nav>
+          <div className=" topmenu left_menu"></div>
+          <div className=" topmenu centered_menu">
+            {pathname === "/registration" ? "Registration" : "Survey"}
+          </div>
+          <div className=" topmenu right_menu">
+            <Link href="index.html">
+              <i className="fa fa-home fa-2x"></i>
+            </Link>
+          </div>
+        </nav>
+      </>
+    );
 }
 
 export default UserHeader;
