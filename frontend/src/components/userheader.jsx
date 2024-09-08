@@ -4,12 +4,14 @@ const UserHeader = () =>{
 
     const locaton = useLocation()
     const pathname = locaton.pathname
+    console.log(pathname);
     return (
       <>
         <nav>
           <div className=" topmenu left_menu"></div>
           <div className=" topmenu centered_menu">
-            {pathname === "/registration" ? "Registration" : "Survey"}
+            {pathname === "/indexpage_two" ? "PROMOTERS" : "Registration"}
+            {pathname === "/rides" ? "125 HD TEST REPORTING DATA" : ""}
           </div>
           <div className=" topmenu right_menu">
             <Link href="index.html">

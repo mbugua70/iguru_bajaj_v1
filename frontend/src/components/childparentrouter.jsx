@@ -21,6 +21,7 @@ import EditEvent from "./EditEvent";
 // import { requireAuth } from "./utilis"
 import { requireAuth } from "./utilis";
 import FormLayout from "./FormLayout";
+import IndexPageTwo from "./indexpage_two";
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
@@ -32,6 +33,7 @@ export const router = createBrowserRouter(
           loader={loginloader}
           action={loadingAction}
         />
+        <Route path="/indexpage_two" element={<IndexPageTwo />} />
         <Route path="/rides" element={<SurveyLayout />} loader={surveyLoader}>
           <Route
             path="/rides"
@@ -48,7 +50,6 @@ export const router = createBrowserRouter(
               }}
             />
           </Route>
-
         </Route>
       </Route>
       <Route path="*" element={<PageNotFound />} />

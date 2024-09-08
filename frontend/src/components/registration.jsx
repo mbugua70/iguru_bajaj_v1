@@ -20,8 +20,13 @@ export const action = async ({ request }) => {
   const ba_name = formData.get("ba_name");
   const ba_phone = formData.get("ba_phone");
   const ba_location = formData.get("ba_location");
+  console.log(ba_name, ba_location, ba_phone);
   if (!ba_location || !ba_name || !ba_phone) {
     return "Please fill all the required fields";
+  }
+
+  if (!ba_location) {
+    return "Please fill in the location field";
   }
   const formdata = new FormData();
   formdata.append("ba_name", ba_name);
@@ -34,6 +39,9 @@ export const action = async ({ request }) => {
     const ba_location = formdata.get("ba_location");
 
     const workout = { ba_name, ba_phone, ba_location };
+
+    localStorage.setItem("Auth", JSON.stringify({ user: workout }));
+
     const data = await loginUser(workout);
     if (data) {
       const loginData = JSON.stringify(data);
@@ -86,7 +94,7 @@ const RegistrationPage = () => {
   useEffect(() => {
     if (errorMessage) {
       notifyError(errorMessage);
-      console.log("rendered")
+      console.log("rendered");
     }
   }, [errorMessage]);
 
@@ -118,6 +126,7 @@ const RegistrationPage = () => {
                 <br />
                 <input
                   id="ba_name"
+                  name="ba_name"
                   placeholder="Your Name"
                   type="text"
                   defaultValue={
@@ -130,6 +139,7 @@ const RegistrationPage = () => {
                 <br />
                 <input
                   id="ba_phone"
+                  name="ba_phone"
                   placeholder="Your Phone Number"
                   type="tel"
                   defaultValue={
@@ -141,8 +151,9 @@ const RegistrationPage = () => {
                 <span>Region</span>
                 <br />
                 <input
-                  id="ba_region"
-                  placeholder="Region"
+                  id="ba_location"
+                  name="ba_location"
+                  placeholder="Location"
                   type="text"
                   defaultValue={
                     storeBaTwo === null ? "" : storeBaTwo.user.ba_location

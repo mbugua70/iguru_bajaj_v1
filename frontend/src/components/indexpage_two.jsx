@@ -1,17 +1,11 @@
 import { NavLink } from "react-router-dom";
 import HomeNavBar from "./homenavbar";
 
-
 import "react-toastify/dist/ReactToastify.css";
 
-
-
-
-const IndexPage = () => {
+const IndexPageTwo = () => {
   return (
     <>
-      {/* navbar below */}
-      <HomeNavBar />
       {/* index content */}
       <div className="main_body">
         <div
@@ -22,21 +16,21 @@ const IndexPage = () => {
           <div className="col s12 m12">
             <p>
               <NavLink
-                to="indexpage_two"
-                className="waves-effect block waves-light black btn-large w80"
+                to="dealer"
+                className="waves-effect block waves-light pink  btn-large w80"
               >
-                Promoters Report
+                Dealer Report
               </NavLink>
             </p>
           </div>
           <div className="col s12 m12">
             <p>
               <NavLink
-                to="rides"
-                className="waves-effect block waves-light orange  btn-large w80"
+                to="fleet"
+                className="waves-effect block waves-light green  btn-large w80"
                 style={{ textAlign: "center" }}
               >
-                125 HD TEST RIDES REPORTING
+                CAMPAIGN FLEET OWNER REPORT
               </NavLink>
             </p>
           </div>
@@ -45,18 +39,17 @@ const IndexPage = () => {
             {" "}
             <p>
               <NavLink
-                to="registration"
-                className="waves-effect waves-light green  btn-large w80"
+                to="rider"
+                className="waves-effect block waves-light blue  btn-large w80"
               >
-                Registration
+                CAMPAIGN RIDER REPORT
               </NavLink>
             </p>
           </div>
         </div>
       </div>
-      {/* <Outlet /> */}
     </>
   );
 };
 
-export default IndexPage;
+export default IndexPageTwo;

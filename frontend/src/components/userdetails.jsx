@@ -4,7 +4,7 @@ const UserDetails = ({ userData }) => {
   return (
     <>
       <div className="card-panel">
-        <Link className="editButton" to="/survey/edit">
+        <Link className="editButton" to="/rides/edit">
           Edit
         </Link>
 
