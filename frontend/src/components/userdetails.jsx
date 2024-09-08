@@ -1,10 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const UserDetails = ({ userData }) => {
+  const location = useLocation();
+  const pathname = location.pathname;
+  console.log(pathname);
   return (
     <>
       <div className="card-panel">
-        <Link className="editButton" to="/rides/edit">
+        <Link className="editButton" to={`${pathname}/edit`}>
           Edit
         </Link>
 

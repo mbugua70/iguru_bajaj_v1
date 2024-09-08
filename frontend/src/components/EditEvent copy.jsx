@@ -30,20 +30,14 @@ export default function EditEvent() {
       await queryClient.cancelQueries({
         queryKey: ["user", userData.userId],
       });
-      // the use of getQueryData to get the data
-      // takes the queryKey as its parameter
-      // it gets the previousOld data
+
       const previousData = queryClient.getQueryData(["user", userData.userId]);
       queryClient.setQueryData(["user", userData.userId], newEventData);
 
       // inorder for the previousData to be part of the context we should return it
       return { previousData };
     },
-    //  has callback fun as its property
-    // the callBack fun has three parameter
-    // 1. error
-    // 2. newData
-    // 3. context method
+
     onError: (error, data, context) => {
       console.error("Error in mutation:", error);
       queryClient.setQueryData(["user", userData.userId], context.previousData);

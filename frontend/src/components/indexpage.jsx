@@ -22,7 +22,7 @@ const IndexPage = () => {
           <div className="col s12 m12">
             <p>
               <NavLink
-                to="indexpage_two"
+                to="promoters"
                 className="waves-effect block waves-light black btn-large w80"
               >
                 Promoters Report

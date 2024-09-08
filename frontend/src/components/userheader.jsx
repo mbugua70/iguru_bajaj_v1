@@ -10,8 +10,16 @@ const UserHeader = () =>{
         <nav>
           <div className=" topmenu left_menu"></div>
           <div className=" topmenu centered_menu">
-            {pathname === "/indexpage_two" ? "PROMOTERS" : "Registration"}
-            {pathname === "/rides" ? "125 HD TEST REPORTING DATA" : ""}
+            {pathname === "/registration" ? "Registration" : ""}
+            {pathname === "/promoters" ? "PROMOTERS" : ""}
+            {pathname.includes("/rides") ? "125 HD TEST RIDES" : ""}
+            {pathname === "/rides/edit" ? "125 HD TEST RIDES" : ""}
+            {pathname === "/promoters/dealer" ? "DEALER DATA" : ""}
+            {pathname === "/promoters/dealer/edit" ? "DEALER DATA" : ""}
+            {pathname === "/promoters/fleet" ? "FLEET OWNER DATA" : ""}
+            {pathname === "/promoters/fleet/edit" ? "FLEET OWNER DATA" : ""}
+            {pathname === "/promoters/rider" ? "RIDER DATA" : ""}
+            {pathname === "/promoters/rider/edit" ? "RIDER DATA" : ""}
           </div>
           <div className=" topmenu right_menu">
             <Link href="index.html">
