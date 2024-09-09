@@ -393,6 +393,16 @@
     left: 0;
   }
 
+  .error-btn_page{
+     background-color: rgb(150, 30, 30);
+     padding: 20px 30px;
+     margin: 0;
+     color: #fff;
+     font-size: 24px;
+     font-weight: 400;
+     border-radius: 8px;
+  }
+
 
 @keyframes lds-ring {
     0% {
